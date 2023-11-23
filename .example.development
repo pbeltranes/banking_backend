@@ -1,0 +1,19 @@
+# Node Environment : development / staging / stable / production
+NODE_ENV=
+
+# App Environment : local / staging / live
+APP_ENV=
+
+# Database Environment (MongoDB / MySQL)
+DB_TYPE=
+DB_HOST=
+DB_USER=
+DB_PASS=
+DB_PORT=
+DB_NAME=
+DB_CONNECTION=
+# MYSQL_ROOT_PASS=vd1fewTy52u67kjh
+# MYSQL_DB_NAME=your_db_name
+# MYSQL_DB_USER=your_db_user_name
+# MYSQL_DB_PASS=your_db_user_pass
+
