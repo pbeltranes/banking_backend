@@ -37,19 +37,24 @@ function connectDB() {
     }
   }
 
-  
-  return  connection()
-  //  : {
-  //   collection(name: string) {
-  //     return {
-  //       insertOne(doc: object) {
-  //         return new Promise((resolve, reject) => {
-  //           return resolve({ _id: "123" });
-  //         });
-  //       },
-  //     };
-  //   },
-  // };
+  ///// MOCK
+  return  NODE_ENV !== "mock" ? connection()
+   : {
+    collection(name: string) {
+      return {
+        insertOne(doc: object) {
+          return new Promise((resolve, reject) => {
+            return resolve({ id: "123" });
+          });
+        },
+        findOne(quer: object) {
+          return new Promise((resolve, reject) => {
+            return resolve({ account_id: 123456789, initial_balance: 10000 });
+          });
+        },
+      };
+    },
+  };
 
 }
 
@@ -58,16 +63,8 @@ export async function getMongoDS() {
   const collectionAccount = db.collection("accounts");
   const collectionTransaction = db.collection("transactions");
   const accountDatabase: DatabaseWrapper = {
-    // find: (query: Query) =>
-    //   collectionVideoInfo
-    //     .find(query.search)
-    //     .limit(query.limit)
-    //     .skip(query.skip)
-    //     .toArray(),
     insertOne: (doc) => collectionAccount.insertOne(doc),
     findOne: (query) => collectionAccount.findOne(query),
-    // updateOne: (id, data: object) => collectionVideoInfo.updateOne(id, data),
-    //deleteOne: (id: String) => db.collection("contacts").deleteOne({ _id: id }),
   };
 
   const transactionDatabase: DatabaseWrapper = {
