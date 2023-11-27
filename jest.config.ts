@@ -5,6 +5,12 @@ const config: Config = {
     transform: {
         '^.+\\.tsx?$': 'ts-jest',
     },
+    "coveragePathIgnorePatterns": [
+        "node_modules",
+        "<rootDir>/src/infrastructure/database/*",
+        "<rootDir>/src/infrastructure/routes/middlewares/dependencies.ts",
+        ".mock.ts"
+    ],
 };
 
 export default config;

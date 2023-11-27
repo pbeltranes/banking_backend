@@ -5,10 +5,10 @@ import {
   ResponseFindAccount,
 } from "../../../src/domain/entities/accounts";
 import { AccountRepository } from "../../../src/domain/infrastructure/repositories/accounts-repository";
-import { CreateAccount } from "../../../src/application/accounts/create";
+import { FindOneAccount } from "../../../src/application/accounts/find-one";
 import { generateUniqueId } from "../../../src/configs/utils";
 
-describe("Get All Contacts Use Case", () => {
+describe("Find one account Use Case", () => {
   class MockAccountRespository implements AccountRepository {
     create(params: RequestAccounts): Promise<ResponseAccounts> {
       throw new Error("Method not implemented.");
@@ -18,10 +18,16 @@ describe("Get All Contacts Use Case", () => {
     }
   }
 
-  const mockData = <ResponseAccounts>{
+  const mockData = <ResponseFindAccount>{
+    name: "string",
+    account_number: 1111111111111111,
+    initial_balance: 100000,
+    account_id: generateUniqueId(1111111111111111),
     id: 1111,
   };
-
+  const params: RequestFindAccount = {
+    account_number: 1111111111111111,
+  };
   let mockAccountRepository: AccountRepository;
 
   beforeEach(() => {
@@ -31,17 +37,11 @@ describe("Get All Contacts Use Case", () => {
 
   test("should return data", async () => {
     jest
-      .spyOn(mockAccountRepository, "create")
+      .spyOn(mockAccountRepository, "findOne")
       .mockImplementation(() => Promise.resolve(mockData));
-    const createAccount = new CreateAccount(mockAccountRepository);
+    const findOneAccount = new FindOneAccount(mockAccountRepository);
 
-    const params: RequestAccounts = {
-      name: "string",
-      account_number: 1111111111111111,
-      initial_balance: 100000,
-      account_id: generateUniqueId(1111111111111111),
-    };
-    const result = await createAccount.execute(params);
+    const result = await findOneAccount.execute(params);
     expect(result).toStrictEqual(mockData);
   });
 });

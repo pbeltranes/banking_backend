@@ -1,12 +1,10 @@
-// Libs
-import { BSON } from "mongodb";
 // Interfaces
 import { AccountDataSource } from "../../domain/infrastructure/database/account";
 import {
   DatabaseWrapper,
 } from "../../domain/infrastructure/database/database-wrapper";
 // Entities
-import { Account, ResponseAccounts } from "../../domain/entities/accounts";
+import { Account, RequestFindAccount, ResponseAccountsRepository, ResponseFindAccount } from "../../domain/entities/accounts";
 
 export class MongoDBAccountDataSource implements AccountDataSource {
   private database: DatabaseWrapper;
@@ -14,9 +12,13 @@ export class MongoDBAccountDataSource implements AccountDataSource {
     this.database = database;
   }
 
-  async insertOne(account: Account): Promise<ResponseAccounts> {
+  async insertOne(account: Account): Promise<ResponseAccountsRepository> {
     const result = await this.database.insertOne(account);
-    return result as ResponseAccounts;
+    return result as ResponseAccountsRepository;
+  }
+  async findOne(params: RequestFindAccount): Promise<ResponseFindAccount> {
+    const result = await this.database.findOne(params);
+    return result as ResponseFindAccount;
   }
 
 

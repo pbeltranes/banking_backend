@@ -1,32 +1,24 @@
 import { Router, Request, Response } from "express";
-// import { CreateAccountUseCase } from "../../domain/application/accounts/create";
-// import { CreateTransactionUseCase } from "../../domain/application/transactions/create";
+import { largeTransaction } from "./middlewares";
 const router: Router = Router();
 
-///////////////////
-// Project APIs
-//////////////////
+///////////////////////////
+// TRANSACTION
+/////////////////////////
 
-
-
-router.post("/transaction", async (req: Request, res: Response) => {
+// TODO: AGREGAR JOI
+router.post("/", largeTransaction, async (req: Request, res: Response) => {
   try {
-    const { createTransaction } = res.locals.dependencies;
+
     const { body } = req;
+    const { createTransaction } = res.locals.dependencies;
     const result = await createTransaction.execute(body);
-    res.status(200).json(result);
+    return res.status(201).json(result);
   } catch (err) {
     console.log(err);
-    res.status(500).json({ message: err.message });
+    return res.status(404).json(err);
   }
 });
-
-// TODO: autenticar comunicacion
-// ------ Add JWT to chosen routes
-// import jwt    from 'express-jwt'
-// import config from '../configs/config'
-// const JwtCheck = jwt({ secret: config.jwt.key })
-// router.use('/v1/samples', JwtCheck, sampleRouter)
 
 // TODO: documentar con swagger
 // import swaggerUi  from 'swagger-ui-express'

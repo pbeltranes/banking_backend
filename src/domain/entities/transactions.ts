@@ -13,6 +13,7 @@ export interface RequestTransaction {
   type: string;
   amount: number;
   account_id: number;
+  balance_pre_transaction?: number;
 }
 
 export interface ResponseTransaction {

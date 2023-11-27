@@ -12,41 +12,24 @@ app.use(json());
 app.use(helmet());
 const corsOptions = {
   origin: "*",
-  credentials: true, //access-control-allow-credentials:true
+  credentials: true,
   optionSuccessStatus: 200,
 };
 
 app.use(cors(corsOptions)); // Use this after the variable declaration
 
-// app.use(cors())
-
-// ------ Add config to access everywhere
-// import config from "./configs";
-// app.set("config", config);
-
-// ------ Add JWT to system globally
-// import jwt from 'express-jwt'
-// app.use(jwt({ secret: config.jwt.key }))
-
-// ------ Add logger to system
-// import logger from './middlewares/logger'
-// app.use(logger)
-
-// ---------- DI
-// import s3 from './middlewares/s3'
-// app.use(s3)
 
 // ------ Require all routes
 import router from "./infrastructure/routes";
 
 // ------ Add health check to system
 
+// BAJA EL COVERAGE
 app.get("/health", (req, res) => {
   res.status(200).send("OK");
 });
 
-// Middleware
-app.use("/", router);
+app.use(router);
 
 // ------ Add Response Decorator (& error handler) to system
 // import decoratorResponse from './middlewares/decorator'

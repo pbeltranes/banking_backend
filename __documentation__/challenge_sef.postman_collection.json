@@ -1,0 +1,64 @@
+{
+	"info": {
+		"_postman_id": "5055cd2c-9d01-408c-b013-ac74e6f00689",
+		"name": "challenge_sef",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "30439612"
+	},
+	"item": [
+		{
+			"name": "/TRANSACTION",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"type\": \"nombre\",\n    \"amount\": 100,\n    \"account_id\": 110021212,\n    \"balance_pre_transaction\": 1000\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:4000/transaction",
+					"host": [
+						"localhost"
+					],
+					"port": "4000",
+					"path": [
+						"transaction"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "/ACCOUNTS",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"name\": \"nombre\",\n    \"account_number\": \"100\",\n    \"initial_balance\": 1100\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:4000/accounts",
+					"host": [
+						"localhost"
+					],
+					"port": "4000",
+					"path": [
+						"accounts"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

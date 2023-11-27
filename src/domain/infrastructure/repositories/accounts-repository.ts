@@ -1,7 +1,10 @@
-import { RequestAccounts, ResponseAccounts } from "../../entities/accounts";
+import { RequestAccounts, RequestFindAccount, ResponseAccounts, ResponseFindAccount } from "../../entities/accounts";
 
 export interface AccountRepository {
   create(
-    params: RequestAccounts
+    data: RequestAccounts
   ): Promise<ResponseAccounts>;
+  findOne(
+    data: RequestFindAccount
+  ): Promise<ResponseFindAccount>;
 }
