@@ -1,5 +1,4 @@
-# Documentacion
-
+Challenge Xepelin
 
 ## Supuestos
 Si se intenta ingresar con una cuenta que ya se encuentra registrada se llevará a transacciones siempre con el balance inicial con el que se creo al cuenta.
